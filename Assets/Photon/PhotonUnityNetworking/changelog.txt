@@ -1,0 +1,6 @@
+PUN 2 Change Log
+
+
+v2.00  (7th August 2018)
+Updated: PUN! Cleaned up naming, callbacks, APIs and demos.
+Note: We are redoing the docs online: https://doc.photonengine.com/en-us/pun/v2
