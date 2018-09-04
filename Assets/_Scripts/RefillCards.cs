@@ -37,6 +37,7 @@ public class RefillCards : MonoBehaviour {
 		{
 			GameObject temp = Instantiate(cardPrefab, deck);
 			CardInfo tempCardInfo = temp.GetComponent<CardInfo>();
+			temp.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 			tempCardInfo.RefillCard(cards[i]);
 		}
 	}
