@@ -77,13 +77,13 @@ public class SwipeDetector : MonoBehaviour
 				// Detect left and right swipe
 				if (angleOfSwipe < mAngleRange && HSS.CurrentPage == 2)
 				{
-					Debug.Log("SwipeRight");
+					//Debug.Log("SwipeRight");
 					HSS.ChangePage(1);
 					//OnSwipeRight();
 				}
 				else if ((180.0f - angleOfSwipe) < mAngleRange && HSS.CurrentPage == 0)
 				{
-					Debug.Log("SwipeLeft");
+					//Debug.Log("SwipeLeft");
 					HSS.ChangePage(1);
 					//OnSwipeLeft();
 				}
