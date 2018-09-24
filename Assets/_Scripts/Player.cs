@@ -4,12 +4,50 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	#region Variables
+    #region Singleton
+    public static Player instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+    #endregion
+    #region Variables
+    int MyID;
 
-	public List<Card> Hand;
 
-	#region Equipement
-	public Card[] race;
+
+
+
+    private void Start()
+    {
+        MyID = PhotonNetwork.player.ID;
+    }
+
+    public List<Card> Hand;
+    #region Turns
+    public delegate void StartTurnDelegate();
+    public StartTurnDelegate startTurnDelegate;
+    public bool MyTurn;
+    [PunRPC]
+    public void SetTurn(int i)
+    {
+        if (MyID == i)
+        {
+            MyTurn = true;
+            startTurnDelegate();
+        }
+        else
+        {
+            MyTurn = false;
+        }
+    }
+    #endregion
+
+    #region Equipement
+    public Card[] race;
 	public Card[] clas;
 
 	public Card helmet;

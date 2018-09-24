@@ -1,0 +1,12 @@
+DoorScript.cs:
+
+	-openFirstDoor.
+	-openSecondDoor.
+
+Player.cs:
+
+	-startTurnDelegate.
+
+TurnManager.cs:
+
+	-endTurnDelegate.

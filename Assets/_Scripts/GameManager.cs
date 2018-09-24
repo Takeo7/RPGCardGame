@@ -41,8 +41,11 @@ public class GameManager : MonoBehaviour {
 
 	private void Start()
 	{
-		ResetDecks();
-		RefillCardsResources();
+        if (PhotonNetwork.player.ID == 1)
+        {
+            ResetDecks();
+            RefillCardsResources();
+        }
 	}
 
 	#endregion
