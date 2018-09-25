@@ -46,4 +46,5 @@ MonoBehaviour:
   - ChangeTurn
   - SetTurn
   - VisualDoor
+  - FirstTurn
   DisableAutoOpenWizard: 1

@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
 
 
 
-
+    public GameManager GM;
 
     private void Start()
     {
@@ -102,17 +102,25 @@ public class Player : MonoBehaviour {
 			}
 		}
 	}
-
-	public void GetCards(List<Card> l)
+    [PunRPC]
+	public void GetCards(int[] id)
 	{
-		//FOR TESTING
-		Hand.AddRange(l);
+        //FOR TESTING
+        if (MyTurn)
+        {
+            int length = id.Length;
+            for (int i = 0; i < length; i++)
+            {
+                Hand.Add(GM.IndexCards[id[i]]);
+                //Animation new card
+            }
+        }
 	}
-	public void GetCards(Card l)
-	{
-		//FOR TESTING
-		Hand.Add(l);
-	}
+    //For Treasure Button
+    public void HitTreasure()
+    {
+        GM.PV.RPC("DrawTreasureCards", PhotonTargets.All);
+    }
 
 	#region Equip Methods
 	bool CheckIfEquipable(Card card)

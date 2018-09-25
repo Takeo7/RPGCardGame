@@ -35,18 +35,30 @@ public class GameManager : MonoBehaviour {
 	private List<Card> doorDeck;
 	private List<Card> discardDeck;
 
-	#endregion
+    public Card[] IndexCards;
 
-	#region Unity Methods
+    public PhotonView PV;
+    public PhotonView Player_PV;
 
-	private void Start()
+
+    #endregion
+
+    #region Unity Methods
+
+    private void Start()
 	{
+        RefillCardsResources();
+    }
+
+    [PunRPC]
+    public void StartMatch()
+    {
         if (PhotonNetwork.player.ID == 1)
         {
             ResetDecks();
-            RefillCardsResources();
+
         }
-	}
+    }
 
 	#endregion
 
@@ -60,17 +72,17 @@ public class GameManager : MonoBehaviour {
 	}
 	void RefillCardsResources()
 	{
-		Card[] cardsTemp = Resources.LoadAll<Card>("Cards");
-		int count = cardsTemp.Length;
+		IndexCards = Resources.LoadAll<Card>("Cards");
+		int count = IndexCards.Length;
 		for (int i = 0; i < count; i++)
 		{
-			if (cardsTemp[i].deckType == DeckType.Door)
+			if (IndexCards[i].deckType == DeckType.Door)
 			{
-				doorDeck.Add(cardsTemp[i]);
+				doorDeck.Add(IndexCards[i]);
 			}
-			else if (cardsTemp[i].deckType == DeckType.Treasure)
+			else if (IndexCards[i].deckType == DeckType.Treasure)
 			{
-				doorDeck.Add(cardsTemp[i]);
+				doorDeck.Add(IndexCards[i]);
 			}
 		}
 		treasureDeck = ShuffleCards(DeckType.Treasure);
@@ -113,18 +125,20 @@ public class GameManager : MonoBehaviour {
 	}	
 
 	//DiscardDeck
-	public void DiscardCard(Card card)
+    [PunRPC]
+	public void DiscardCard(int id)
 	{
-		discardDeck.Add(card);
+		discardDeck.Add(IndexCards[id]);
 	}
 
 	//Player Methods
+    [PunRPC]
 	public void DrawTreasureCards()
 	{
-		currentPlayer.GetCards(GetTreasures(monster.treasures));
+        Player_PV.RPC("GetCards", PhotonTargets.All, GetTreasures(monster.treasures));
 		discardDeck.Add(monster);
 		monster = null;
-	}
+    }
 	public void DrawDoorCard()
 	{
 		Card temp = GetCard(DeckType.Door);
@@ -196,12 +210,12 @@ public class GameManager : MonoBehaviour {
 		}
 		return temp;
 	}
-	List<Card> GetTreasures(int treasures)
+	int[] GetTreasures(int treasures)
 	{
-		List<Card> temp = new List<Card>();
+		int[] temp = new int[treasures];
 		for (int i = 0; i < treasures; i++)
-		{
-			temp.Add(GetCard(DeckType.Treasure));
+		{            
+			temp[i] = GetCard(DeckType.Treasure).index;
 		}
 		return temp;
 	}

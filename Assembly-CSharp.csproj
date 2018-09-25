@@ -64,10 +64,12 @@
     <Compile Include="Assets\_Scripts\Card.cs" />
     <Compile Include="Assets\_Scripts\CardInfo.cs" />
     <Compile Include="Assets\_Scripts\CardSccriptableEditor.cs" />
+    <Compile Include="Assets\_Scripts\DoorScript.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Player.cs" />
     <Compile Include="Assets\_Scripts\RefillCards.cs" />
     <Compile Include="Assets\_Scripts\SwipeDetector.cs" />
+    <Compile Include="Assets\_Scripts\TurnManager.cs" />
     <Compile Include="Assets\_UI\unity-ui-extensions\Examples\ComboBox\ComboBoxChanged.cs" />
     <Compile Include="Assets\_UI\unity-ui-extensions\Examples\Cooldown\CooldownEffect_Image.cs" />
     <Compile Include="Assets\_UI\unity-ui-extensions\Examples\Cooldown\CooldownEffect_SAUIM.cs" />
@@ -233,7 +235,7 @@
     <Compile Include="Assets\_UI\unity-ui-extensions\Scripts\Utilities\UISelectableExtension.cs" />
     <Compile Include="Assets\_UI\unity-ui-extensions\Scripts\VR Extensions\VRCursor.cs" />
     <Compile Include="Assets\_UI\unity-ui-extensions\Scripts\VR Extensions\VRInputModule.cs" />
-    <Compile Include="Assets\DoorScript.cs" />
+    <Compile Include="Assets\NetworkConnection.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\Demo2DJumpAndRun.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\JumpAndRunMovement.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\DemoBoxes\ColorPerPlayer.cs" />
@@ -377,7 +379,6 @@
     <Compile Include="Assets\PhotonChatApi\ChatState.cs" />
     <Compile Include="Assets\PhotonChatApi\ChatUserStatus.cs" />
     <Compile Include="Assets\PhotonChatApi\IChatClientListener.cs" />
-    <Compile Include="Assets\TurnManager.cs" />
     <None Include="Assets\_UI\unity-ui-extensions\Shaders\UIAdditive.shader" />
     <None Include="Assets\_UI\unity-ui-extensions\Shaders\UI Particle AddSmooth.shader" />
     <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
