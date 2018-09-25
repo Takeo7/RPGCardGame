@@ -78,12 +78,13 @@ public class Card : ScriptableObject {
 	public int escapeBonus;
 	#endregion
 
-	public void ChangeName()
+	/*public void ChangeName()
 	{
 		string assetPath = AssetDatabase.GetAssetPath(this.GetInstanceID());
 		AssetDatabase.RenameAsset(assetPath, Name);
 		AssetDatabase.SaveAssets();
-	}
+	}*/
+
 
 }
 public enum DeckType { Door, Treasure}

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour {
+
+    
 
 	#region Singleton
 
@@ -39,6 +42,7 @@ public class GameManager : MonoBehaviour {
 
     public PhotonView PV;
     public PhotonView Player_PV;
+    public PhotonView Turn_PV;
 
 
     #endregion
@@ -56,7 +60,8 @@ public class GameManager : MonoBehaviour {
         if (PhotonNetwork.player.ID == 1)
         {
             ResetDecks();
-
+            Debug.Log("This is first turn");
+            Turn_PV.RPC("FirstTurn", PhotonTargets.All);
         }
     }
 
@@ -78,6 +83,7 @@ public class GameManager : MonoBehaviour {
 		{
 			if (IndexCards[i].deckType == DeckType.Door)
 			{
+                Debug.Log("CheckIndex: " + IndexCards[i].Name);
 				doorDeck.Add(IndexCards[i]);
 			}
 			else if (IndexCards[i].deckType == DeckType.Treasure)
@@ -139,6 +145,7 @@ public class GameManager : MonoBehaviour {
 		discardDeck.Add(monster);
 		monster = null;
     }
+    [PunRPC]
 	public void DrawDoorCard()
 	{
 		Card temp = GetCard(DeckType.Door);
@@ -153,25 +160,25 @@ public class GameManager : MonoBehaviour {
 				}
 				else
 				{
-					currentPlayer.GetCards(temp);
-					//Show player card
-					//End turn
-				}
+                    Player_PV.RPC("GetCards", PhotonTargets.All, temp.index);
+                    //Show player card
+                    //End turn
+                }
 				break;
 			case CardType.Race:
 			case CardType.Class:
 				if (firstDraw)
 				{
-					//Show all card
-					currentPlayer.GetCards(temp);
-					firstDraw = false;
+                    //Show all card
+                    Player_PV.RPC("GetCards", PhotonTargets.All, temp.index);
+                    firstDraw = false;
 				}
 				else
 				{
-					currentPlayer.GetCards(temp);
-					//Show player card
-					//End turn
-				}
+                    Player_PV.RPC("GetCards", PhotonTargets.All, temp.index);
+                    //Show player card
+                    //End turn
+                }
 				break;
 			case CardType.Monster:
 				if (firstDraw)
@@ -182,10 +189,10 @@ public class GameManager : MonoBehaviour {
 				}
 				else
 				{
-					currentPlayer.GetCards(temp);
-					//ShowPlayerCard
-					//End turn
-				}
+                    Player_PV.RPC("GetCards", PhotonTargets.All, temp.index);
+                    //ShowPlayerCard
+                    //End turn
+                }
 				break;
 			default:
 				break;
@@ -220,5 +227,18 @@ public class GameManager : MonoBehaviour {
 		return temp;
 	}
 
-	#endregion
+    #endregion
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            Vector3 pos = transform.localPosition;
+            stream.Serialize(ref pos);
+        }
+        else
+        {
+            Vector3 pos = Vector3.zero;
+            stream.Serialize(ref pos);  // pos gets filled-in. must be used somewhere
+        }
+    }
 }

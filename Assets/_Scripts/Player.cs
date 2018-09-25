@@ -15,9 +15,7 @@ public class Player : MonoBehaviour {
     }
     #endregion
     #region Variables
-    int MyID;
-
-
+    public int MyID;
 
     public GameManager GM;
 
@@ -27,23 +25,13 @@ public class Player : MonoBehaviour {
     }
 
     public List<Card> Hand;
+
+
     #region Turns
-    public delegate void StartTurnDelegate();
-    public StartTurnDelegate startTurnDelegate;
+
     public bool MyTurn;
-    [PunRPC]
-    public void SetTurn(int i)
-    {
-        if (MyID == i)
-        {
-            MyTurn = true;
-            startTurnDelegate();
-        }
-        else
-        {
-            MyTurn = false;
-        }
-    }
+
+    
     #endregion
 
     #region Equipement
@@ -116,6 +104,14 @@ public class Player : MonoBehaviour {
             }
         }
 	}
+    [PunRPC]
+    public void GetCards(int id)
+    {
+        if (MyTurn)
+        {
+            Hand.Add(GM.IndexCards[id]);
+        }
+    }
     //For Treasure Button
     public void HitTreasure()
     {

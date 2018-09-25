@@ -1,31 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetworkConnection : MonoBehaviour {
-
+    public Text test;
 
     string GameVersion = "0.0.1";
     public GameManager GM;
     public PhotonView GM_PV;
 
+    private void Start()
+    {
+        Connect();
+    }
 
     #region Network
 
     void Connect() // funcion para conectar a la Network
     {
-        if (PlayerPrefs.GetInt("Online") == 0) // If para ver si ejecutamos en Offline
-        {
-            PhotonNetwork.offlineMode = true; // Ejecutamos el OfflineMode
-            OnJoinedLobby(); // Conectamos directamente a una Room sin pasar por la Network
-        }
-        else
-        {
-
-            PhotonNetwork.ConnectUsingSettings(GameVersion);
-
-            // Conectamos usando los settings Default del Usuario
-        }
+        PhotonNetwork.ConnectUsingSettings(GameVersion);
     }
 
     void OnConnectedToMaster() // Funcion para saber si hemos conectado al Master
@@ -80,16 +74,21 @@ public class NetworkConnection : MonoBehaviour {
     }
     public void GetNumPlayer()
     {
+        test.text = "Mi ID: " + PhotonNetwork.player.ID;
         Debug.Log("Player ID: " + PhotonNetwork.player.ID);
         switch (PhotonNetwork.player.ID)
         {
             case 1:
+                break;
             case 2:
+                Debug.Log("Start Match");
+                GM_PV.RPC("StartMatch", PhotonTargets.All);
+                PhotonNetwork.room.IsVisible = false;
+                break;
             case 3:
                 break;
             case 4:
-                GM_PV.RPC("StartMatch", PhotonTargets.MasterClient);
-                PhotonNetwork.room.IsVisible = false;
+
                 break;
             default:
                 Disconnect();

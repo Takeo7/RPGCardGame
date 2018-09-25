@@ -8,6 +8,7 @@ public class DoorScript : MonoBehaviour {
     public PhotonView PV;
     public Animator anim;
     public Button buttonDoor;
+    TurnManager TM;
     Player player;
     int firstDoor = 0;
 
@@ -17,11 +18,12 @@ public class DoorScript : MonoBehaviour {
     public delegate void OpenSecondDoor();
     public OpenSecondDoor openSecondDoor;
 
-    private void Start()
+    void Awake()
     {
         player = Player.instance;
-        player.startTurnDelegate += CheckDoorInteractuable;
-        player.startTurnDelegate += ResetDoor;
+        TM = TurnManager.instance;
+        TM.startTurnDelegate += CheckDoorInteractuable;
+        TM.startTurnDelegate += ResetDoor;
     }
     [PunRPC]
     public void VisualDoor()
