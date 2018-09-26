@@ -14,6 +14,9 @@ public class DoorScript : MonoBehaviour {
     int firstDoor = 0;
 
     public Image Monster;
+    public Button monsterButton;
+    public Sprite chestSprite;
+    public bool chestOn = false;
 
     public delegate void OpenFirstDoor();
     public OpenFirstDoor openFirstDoor;
@@ -83,8 +86,28 @@ public class DoorScript : MonoBehaviour {
     public void ActivateMonster(int id)
     {
         Debug.Log("ActivateMonster");
-        Monster.enabled = true;
+        Monster.gameObject.SetActive(true);
         Monster.sprite = GM.Monsters[id];
+    }
+
+    [PunRPC]
+    public void ShowTreasure()
+    {
+        chestOn = true;
+        Monster.sprite = chestSprite;
+    }
+    public void MonsterButton()
+    {
+        if (chestOn == false)
+        {
+            PV.RPC("ShowTreasure", PhotonTargets.All);
+        }
+        else
+        {
+            PV.RPC("DrawTreasureCards", PhotonTargets.All);
+            Monster.gameObject.SetActive(false);
+        }
+        
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

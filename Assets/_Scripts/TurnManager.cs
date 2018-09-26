@@ -20,6 +20,8 @@ public class TurnManager : MonoBehaviour {
     #endregion
     public int actualTurn;
 
+    public GameManager GM;
+
     Player player;
 
     public delegate void StartTurnDelegate();
@@ -47,7 +49,7 @@ public class TurnManager : MonoBehaviour {
     {
         endTurnDelegate();
         actualTurn++;
-        if (actualTurn >= 5)
+        if (actualTurn >= GM.maxPlayers)
         {
             actualTurn = 1;
         }

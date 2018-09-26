@@ -235,6 +235,8 @@
     <Compile Include="Assets\_UI\unity-ui-extensions\Scripts\VR Extensions\VRCursor.cs" />
     <Compile Include="Assets\_UI\unity-ui-extensions\Scripts\VR Extensions\VRInputModule.cs" />
     <Compile Include="Assets\CardInfoBack.cs" />
+    <Compile Include="Assets\MainMenuManager.cs" />
+    <Compile Include="Assets\MatchingIcon.cs" />
     <Compile Include="Assets\NetworkConnection.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\Demo2DJumpAndRun.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\JumpAndRunMovement.cs" />

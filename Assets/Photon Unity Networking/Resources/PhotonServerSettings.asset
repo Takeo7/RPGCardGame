@@ -57,4 +57,10 @@ MonoBehaviour:
   - DrawSecondDoorCard
   - ActivateCardRPC
   - ActivateMonster
+  - ChangeParams
+  - InstantiateNET
+  - UpdateReady
+  - SetReady
+  - ShowTreasure
+  - GetFirstHand
   DisableAutoOpenWizard: 1

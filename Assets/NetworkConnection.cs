@@ -6,9 +6,15 @@ using UnityEngine.UI;
 public class NetworkConnection : MonoBehaviour {
     public Text test;
 
+    int readyNumPlayers;
+
     string GameVersion = "0.0.1";
     public GameManager GM;
     public PhotonView GM_PV;
+
+    public PhotonView PV;
+
+    public GameObject matchingPanel;
 
     private void Start()
     {
@@ -79,22 +85,63 @@ public class NetworkConnection : MonoBehaviour {
         switch (PhotonNetwork.player.ID)
         {
             case 1:
-
+                PV.RPC("InstantiateNET", PhotonTargets.AllBuffered, "peter");
                 break;
             case 2:
-                Debug.Log("Start Match");
-                GM_PV.RPC("StartMatch", PhotonTargets.All);
-                PhotonNetwork.room.IsVisible = false;
+                PV.RPC("InstantiateNET", PhotonTargets.AllBuffered, "Luis");
                 break;
             case 3:
+                PV.RPC("InstantiateNET", PhotonTargets.AllBuffered, "boris");
                 break;
             case 4:
-
+                PV.RPC("InstantiateNET", PhotonTargets.AllBuffered, "Edu");
                 break;
             default:
                 Disconnect();
                 break;
         }
+    }
+    [PunRPC]
+    public void InstantiateNET(string n)
+    {
+        if (PhotonNetwork.player.ID == 1)
+        {
+            GameObject g;
+            g = PhotonNetwork.Instantiate("matchingIcon", Vector3.zero, Quaternion.identity, 0);
+            g.GetComponent<PhotonView>().RPC("ChangeParams", PhotonTargets.AllBuffered, n);
+            g.transform.SetParent(matchingPanel.transform);
+            g.transform.localScale = Vector3.one;
+            GM.maxPlayers++;
+        }
+    }
+
+    public void ReadyButton()
+    {
+        PV.RPC("UpdateReady", PhotonTargets.AllBuffered, PhotonNetwork.player.ID);
+    }
+    [PunRPC]
+    public void UpdateReady(int i)
+    {
+        if (PhotonNetwork.player.ID == 1)
+        {
+            readyNumPlayers++;
+            PV.RPC("SetReady", PhotonTargets.AllBuffered, i);
+            if (readyNumPlayers >= GM.maxPlayers)
+            {
+                AllReady();
+            }
+        }
+    }
+    [PunRPC]
+    public void SetReady(int i)
+    {
+        matchingPanel.transform.GetChild(i - 1).GetComponent<MatchingIcon>().readyImage.enabled = true;
+    }
+    public void AllReady()
+    {
+        Debug.Log("Start Match");
+        GM_PV.RPC("StartMatch", PhotonTargets.All);
+        PhotonNetwork.room.IsVisible = false;
     }
     #endregion
 }

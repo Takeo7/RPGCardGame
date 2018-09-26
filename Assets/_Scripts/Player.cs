@@ -17,6 +17,9 @@ public class Player : MonoBehaviour {
     #region Variables
     public int MyID;
 
+    public GameObject cardPrefab;
+    public Transform handTransform;
+
     public GameManager GM;
 
     private void Start()
@@ -100,6 +103,7 @@ public class Player : MonoBehaviour {
             for (int i = 0; i < length; i++)
             {
                 Hand.Add(GM.IndexCards[id[i]]);
+                InstantiateHandCard(GM.IndexCards[id[i]]);
                 //hand new card visual
             }
         }
@@ -110,7 +114,27 @@ public class Player : MonoBehaviour {
         if (MyTurn)
         {
             Hand.Add(GM.IndexCards[id]);
+            InstantiateHandCard(GM.IndexCards[id]);
         }
+    }
+    [PunRPC]
+    public void GetFirstHand(int[] ids, int playerid)
+    {
+        if (playerid == PhotonNetwork.player.ID)
+        {
+            int length = ids.Length;
+            for (int i = 0; i < length; i++)
+            {
+                Hand.Add(GM.IndexCards[ids[i]]);
+                InstantiateHandCard(Hand[i]);
+                //hand new card visual
+            }
+        }
+    }
+    public void InstantiateHandCard(Card card)
+    {
+        GameObject g = Instantiate(cardPrefab, handTransform);
+        g.GetComponent<CardInfo>().RefillCard(card);
     }
     //For Treasure Button
     public void HitTreasure()

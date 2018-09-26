@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4ae9d3d175031438e3bda800a3c911, type: 3}
+  m_Name: Porra del machotismo 4
+  m_EditorClassIdentifier: 
+  index: 10
+  deckType: 1
+  Name: Porra del machotismo
+  icon: {fileID: 0}
+  description: "S\xF3lo puede ser usada por jugadores masculinos y mujeres que hayan
+    cambiado de sexo"
+  aggro: 
+  price: 400
+  cardType: 0
+  toolbar: 0
+  isConsumable: 0
+  consumableBonus: 0
+  enemyOnly: 0
+  isMonster: 0
+  monsterIndex: 0
+  monsterLevel: 0
+  monsterType: 0
+  treasures: 0
+  isRace: 0
+  raceType: 0
+  isClass: 0
+  classType: 0
+  isEquipment: 0
+  equipmentType: 0
+  raceRestriction: 0
+  racePermission: 0
+  classRestriction: 0
+  classPermission: 0
+  sexRestriction: 0
+  isBig: 0
+  isTwoHanded: 0
+  equipmentBonus: 0
+  escapeBonus: 0

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4ae9d3d175031438e3bda800a3c911, type: 3}
   m_Name: Raza Elfo
   m_EditorClassIdentifier: 
-  index: 2
+  index: 12
   deckType: 0
   Name: Elfo
   icon: {fileID: 21300000, guid: 99ecd9f75c6f3aa4ca79650a017816a8, type: 3}

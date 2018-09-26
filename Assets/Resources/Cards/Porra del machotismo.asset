@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4ae9d3d175031438e3bda800a3c911, type: 3}
   m_Name: Porra del machotismo
   m_EditorClassIdentifier: 
-  index: 1
+  index: 6
   deckType: 1
   Name: Porra del machotismo
   icon: {fileID: 0}
@@ -27,6 +27,8 @@ MonoBehaviour:
   isMonster: 0
   monsterIndex: 0
   monsterLevel: 0
+  monsterType: 0
+  treasures: 0
   isRace: 0
   raceType: 0
   isClass: 0

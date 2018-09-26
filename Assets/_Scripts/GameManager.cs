@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour {
 
     #region Variables
 
+    public Transform panelTransofrm;
+    public GameObject matchingPanel;
+
     public CardInfo AnimCardPrew;
 
     public Sprite[] Monsters;
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour {
 	byte doorsToOpen;
 	bool firstDraw = true;
 
+    public byte maxPlayers = 0;
 	Player currentPlayer;
 	List<Player> players;
 
@@ -69,10 +73,26 @@ public class GameManager : MonoBehaviour {
     [PunRPC]
     public void StartMatch()
     {
+        matchingPanel.SetActive(false);
         if (PhotonNetwork.player.ID == 1)
         {            
             Debug.Log("This is first turn");
+            SendFirsthand();
             TM.FirstTurn();
+        }
+    }
+
+    public void SendFirsthand()
+    {
+        for (int i = 1; i <= maxPlayers; i++)
+        {
+            int[] ids = new int[8];
+            for (int j = 0; j < 4; j++)
+            {
+                ids[j] = GetCard(DeckType.Door).index;
+                ids[j + 4] = GetCard(DeckType.Treasure).index;
+            }
+            Player_PV.RPC("GetFirstHand", PhotonTargets.All, ids, i);
         }
     }
 
@@ -155,6 +175,8 @@ public class GameManager : MonoBehaviour {
 		discardDeck.Add(IndexCards[id]);
 	}
 
+
+
 	//Player Methods
     [PunRPC]
 	public void DrawTreasureCards()
@@ -201,6 +223,7 @@ public class GameManager : MonoBehaviour {
     public void SetFirstDrawTrue()
     {
         firstDraw = true;
+        DS.chestOn = false;
     }
     public void ApplyDoorCard(Card temp)
     {
@@ -239,6 +262,7 @@ public class GameManager : MonoBehaviour {
                 if (firstDraw)
                 {
                     DS_PV.RPC("ActivateMonster", PhotonTargets.All, temp.monsterIndex);
+                    monster = temp;
                     //Apply monster
                     //StartCombat
                 }
