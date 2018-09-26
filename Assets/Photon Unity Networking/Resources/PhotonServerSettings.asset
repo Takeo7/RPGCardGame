@@ -53,4 +53,8 @@ MonoBehaviour:
   - DrawTreasureCards
   - GetCards
   - StartMatch
+  - OpenDoorRPC
+  - DrawSecondDoorCard
+  - ActivateCardRPC
+  - ActivateMonster
   DisableAutoOpenWizard: 1

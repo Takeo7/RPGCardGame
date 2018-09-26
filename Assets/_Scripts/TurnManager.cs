@@ -7,6 +7,8 @@ public class TurnManager : MonoBehaviour {
 
     #region Singleton
     public static TurnManager instance;
+    public PhotonView TM_PV;
+    public DoorScript door;
     private void Awake()
     {
         if (instance == null)
@@ -16,7 +18,7 @@ public class TurnManager : MonoBehaviour {
     }
 
     #endregion
-    int actualTurn;
+    public int actualTurn;
 
     Player player;
 
@@ -36,7 +38,7 @@ public class TurnManager : MonoBehaviour {
         actualTurn = 1;
         if (PhotonNetwork.player.ID == 1)
         {
-            SetTurn(actualTurn);
+            TM_PV.RPC("SetTurn", PhotonTargets.All, actualTurn);
         }
     }
 
@@ -54,17 +56,29 @@ public class TurnManager : MonoBehaviour {
     [PunRPC]
     public void SetTurn(int i)
     {
-        Debug.Log("SetTurn");
         if (PhotonNetwork.player.ID == i)
         {
             player.MyTurn = true;
             startTurnDelegate();
+            //door.ResetDoor();
+            //door.CheckDoorInteractuable();
         }
         else
         {
             player.MyTurn = false;
         }
-        Debug.Log("Mi Turno: " + player.MyTurn);
     }
-
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            Vector3 pos = transform.localPosition;
+            stream.Serialize(ref pos);
+        }
+        else
+        {
+            Vector3 pos = Vector3.zero;
+            stream.Serialize(ref pos);  // pos gets filled-in. must be used somewhere
+        }
+    }
 }

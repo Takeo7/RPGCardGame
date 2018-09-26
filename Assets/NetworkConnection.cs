@@ -79,6 +79,7 @@ public class NetworkConnection : MonoBehaviour {
         switch (PhotonNetwork.player.ID)
         {
             case 1:
+
                 break;
             case 2:
                 Debug.Log("Start Match");

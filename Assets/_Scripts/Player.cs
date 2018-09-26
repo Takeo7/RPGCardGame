@@ -100,7 +100,7 @@ public class Player : MonoBehaviour {
             for (int i = 0; i < length; i++)
             {
                 Hand.Add(GM.IndexCards[id[i]]);
-                //Animation new card
+                //hand new card visual
             }
         }
 	}
@@ -561,6 +561,18 @@ public class Player : MonoBehaviour {
 	{
 		wantToChangeRace = WantToChangeRace;
 	}
-	#endregion
-
+    #endregion
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            Vector3 pos = transform.localPosition;
+            stream.Serialize(ref pos);
+        }
+        else
+        {
+            Vector3 pos = Vector3.zero;
+            stream.Serialize(ref pos);  // pos gets filled-in. must be used somewhere
+        }
+    }
 }
