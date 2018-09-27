@@ -68,7 +68,7 @@ public class DoorScript : MonoBehaviour {
     public void ResetDoor()
     {
         firstDoor = 0;
-        Monster.enabled = false;
+        Monster.gameObject.SetActive(false);
     }
 
     public void CheckDoorInteractuable()
@@ -104,7 +104,7 @@ public class DoorScript : MonoBehaviour {
         }
         else
         {
-            PV.RPC("DrawTreasureCards", PhotonTargets.All);
+            GM.PV.RPC("DrawTreasureCards", PhotonTargets.All);
             Monster.gameObject.SetActive(false);
         }
         

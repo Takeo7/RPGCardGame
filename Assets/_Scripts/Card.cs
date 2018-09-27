@@ -36,10 +36,11 @@ public class Card : ScriptableObject {
 	public int monsterIndex;
 	[HideInInspector]
 	public byte monsterLevel;
-	[HideInInspector]
+    [HideInInspector]
+    public byte treasures;
+    [HideInInspector]
 	public MonsterType monsterType;
-	[HideInInspector]
-	public byte treasures;
+
 	#endregion
 	#region IF_RACE
 	[HideInInspector]

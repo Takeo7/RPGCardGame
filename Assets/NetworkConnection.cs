@@ -16,6 +16,8 @@ public class NetworkConnection : MonoBehaviour {
 
     public GameObject matchingPanel;
 
+    public Button readyButton;
+
     private void Start()
     {
         Connect();
@@ -113,6 +115,7 @@ public class NetworkConnection : MonoBehaviour {
             g.transform.localScale = Vector3.one;
             GM.maxPlayers++;
         }
+        readyButton.interactable = true;
     }
 
     public void ReadyButton()

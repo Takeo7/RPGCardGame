@@ -106,6 +106,8 @@ public class CardSccriptableEditor : Editor {
 			card.monsterIndex = EditorGUILayout.IntField("MonsterIndex", card.monsterIndex);
 			card.monsterLevel = (byte)EditorGUILayout.IntField("MonsterLevel", card.monsterLevel);
 			card.aggro = EditorGUILayout.TextField("Aggro", card.aggro, GUILayout.Height(100));
+            card.treasures = (byte)EditorGUILayout.IntField("Treasures", card.treasures);
+            card.monsterType = (MonsterType)EditorGUILayout.EnumPopup("Monster Type", card.monsterType);
 		}
 		else
 		{

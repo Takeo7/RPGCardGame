@@ -26,8 +26,8 @@ MonoBehaviour:
   isMonster: 1
   monsterIndex: 0
   monsterLevel: 200
+  treasures: 2
   monsterType: 0
-  treasures: 0
   isRace: 0
   raceType: 0
   isClass: 0
