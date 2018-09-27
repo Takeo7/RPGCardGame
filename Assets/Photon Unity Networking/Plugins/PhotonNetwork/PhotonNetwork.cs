@@ -2448,18 +2448,19 @@ public static class PhotonNetwork
         }
     }
 
-    /// <summary>
-    /// Instantiate a prefab over the network. This prefab needs to be located in the root of a "Resources" folder.
-    /// </summary>
-    /// <remarks>
-    /// Instead of using prefabs in the Resources folder, you can manually Instantiate and assign PhotonViews. See doc.
-    /// </remarks>
-    /// <param name="prefabName">Name of the prefab to instantiate.</param>
-    /// <param name="position">Position Vector3 to apply on instantiation.</param>
-    /// <param name="rotation">Rotation Quaternion to apply on instantiation.</param>
-    /// <param name="group">The group for this PhotonView.</param>
-    /// <returns>The new instance of a GameObject with initialized PhotonView.</returns>
-    public static GameObject Instantiate(string prefabName, Vector3 position, Quaternion rotation, byte group)
+	/// <summary>
+	/// Instantiate a prefab over the network. This prefab needs to be located in the root of a "Resources" folder.
+	///  TIENES QUE PONER LA ESCALA Y EL RESTO EN RPC PARA QUE TODOS LO TENGAN EN SU SITIO
+	/// </summary>
+	/// <remarks>
+	/// Instead of using prefabs in the Resources folder, you can manually Instantiate and assign PhotonViews. See doc.
+	/// </remarks>
+	/// <param name="prefabName">Name of the prefab to instantiate.</param>
+	/// <param name="position">Position Vector3 to apply on instantiation.</param>
+	/// <param name="rotation">Rotation Quaternion to apply on instantiation.</param>
+	/// <param name="group">The group for this PhotonView.</param>
+	/// <returns>The new instance of a GameObject with initialized PhotonView.</returns>
+	public static GameObject Instantiate(string prefabName, Vector3 position, Quaternion rotation, byte group)
     {
         return Instantiate(prefabName, position, rotation, group, null);
     }

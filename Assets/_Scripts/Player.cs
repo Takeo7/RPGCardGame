@@ -16,7 +16,8 @@ public class Player : MonoBehaviour {
     #endregion
     #region Variables
     public int MyID;
-
+	public bool canEquip;
+	public bool canDiscard;
     public GameObject cardPrefab;
     public Transform handTransform;
 

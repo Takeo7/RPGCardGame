@@ -9,6 +9,7 @@ public class PlayerCharacter : MonoBehaviour {
     public Text levelText;
     public PhotonView PV;
     int parentSpawn;
+	public int playerID;
 
     Transform[] spawnPoints;
 
@@ -62,4 +63,9 @@ public class PlayerCharacter : MonoBehaviour {
         transform.localPosition = Vector3.zero;
         transform.localScale = Vector3.one;
     }
+	[PunRPC]
+	public void SetPlayerID(int i)
+	{
+		playerID = i;
+	}
 }

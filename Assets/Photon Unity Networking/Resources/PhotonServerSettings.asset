@@ -68,4 +68,5 @@ MonoBehaviour:
   - UpLevel
   - ChangeCharacterTurns
   - SetParentSpawn
+  - SetPlayerID
   DisableAutoOpenWizard: 1

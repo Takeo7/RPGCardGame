@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-    #endregion
+	#endregion
 
-    #region Variables
-
+	#region Variables
+	public Transform canvasTransform;
     public Transform[] spawnPoints;
     public GameObject[] characters;
 
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
 
     public Sprite[] Monsters;
 
-	Card monster;
+	public Card monster;
 
 	byte doorsToOpen;
 	bool firstDraw = true;
@@ -59,12 +59,16 @@ public class GameManager : MonoBehaviour {
 
     public DoorScript DS;
     public TurnManager TM;
+	#region PreviewBigCard
+	public GameObject previewBigCardGO;
+	public CardInfo previewBiggerCard;
+	#endregion
 
-    #endregion
+	#endregion
 
-    #region Unity Methods
+	#region Unity Methods
 
-    private void Start()
+	private void Start()
 	{
         RefillCardsResources();
         TM.startTurnDelegate += SetFirstDrawTrue;
@@ -94,7 +98,8 @@ public class GameManager : MonoBehaviour {
         {
             characters[i] = PhotonNetwork.Instantiate("PlayerCharacter", Vector3.zero, Quaternion.identity, 0);
             characters[i].GetComponent<PlayerCharacter>().PV.RPC("SetParentSpawn", PhotonTargets.All, i);
-            characters[i].GetComponent<PlayerCharacter>().PV.RPC("SetLevel", PhotonTargets.All, i);
+            characters[i].GetComponent<PlayerCharacter>().PV.RPC("SetLevel", PhotonTargets.All, 1);
+			characters[i].GetComponent<PlayerCharacter>().PV.RPC("SetPlayerID", PhotonTargets.All,i+1);
             characters[i].transform.localScale = Vector3.one;
         }
     }
@@ -129,7 +134,6 @@ public class GameManager : MonoBehaviour {
             Player_PV.RPC("GetFirstHand", PhotonTargets.All, ids, i);
         }
     }
-
 	#endregion
 
 	#region CardMethods
