@@ -381,6 +381,7 @@
     <Compile Include="Assets\PhotonChatApi\ChatState.cs" />
     <Compile Include="Assets\PhotonChatApi\ChatUserStatus.cs" />
     <Compile Include="Assets\PhotonChatApi\IChatClientListener.cs" />
+    <Compile Include="Assets\PlayerCharacter.cs" />
     <Compile Include="Assets\ResetScene.cs" />
     <None Include="Assets\_UI\unity-ui-extensions\Shaders\UIAdditive.shader" />
     <None Include="Assets\_UI\unity-ui-extensions\Shaders\UI Particle AddSmooth.shader" />

@@ -63,4 +63,9 @@ MonoBehaviour:
   - SetReady
   - ShowTreasure
   - GetFirstHand
+  - DownLevel
+  - SetLevel
+  - UpLevel
+  - ChangeCharacterTurns
+  - SetParentSpawn
   DisableAutoOpenWizard: 1

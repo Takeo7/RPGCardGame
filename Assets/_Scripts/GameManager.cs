@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour {
 
     #region Variables
 
+    public Transform[] spawnPoints;
+    public GameObject[] characters;
+
     public Transform panelTransofrm;
     public GameObject matchingPanel;
 
@@ -77,10 +80,41 @@ public class GameManager : MonoBehaviour {
         if (PhotonNetwork.player.ID == 1)
         {            
             Debug.Log("This is first turn");
+            SpawnCharacters(maxPlayers);
             SendFirsthand();
             TM.FirstTurn();
         }
     }
+
+    public void SpawnCharacters(int numPlayers)
+    {
+        int length = numPlayers;
+        characters = new GameObject[length];
+        for (int i = 0; i < length; i++)
+        {
+            characters[i] = PhotonNetwork.Instantiate("PlayerCharacter", Vector3.zero, Quaternion.identity, 0);
+            characters[i].GetComponent<PlayerCharacter>().PV.RPC("SetParentSpawn", PhotonTargets.All, i);
+            characters[i].GetComponent<PlayerCharacter>().PV.RPC("SetLevel", PhotonTargets.All, i);
+            characters[i].transform.localScale = Vector3.one;
+        }
+    }
+
+    
+    public void ChangeCharacterTurns(int turn)
+    {
+        int length = maxPlayers;
+        int counter = turn-1;
+        for (int i = 0; i < length; i++)
+        {
+            characters[counter].GetComponent<PlayerCharacter>().PV.RPC("SetParentSpawn", PhotonTargets.All, i);
+            counter++;
+            if (counter >= maxPlayers)
+            {
+                counter = 0;
+            }
+        }
+    }
+
 
     public void SendFirsthand()
     {
